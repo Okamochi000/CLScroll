@@ -1,8 +1,8 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// •¡”‚ÌCLScroll‚ğ“¯Šú
+/// è¤‡æ•°ã®CLScrollã‚’åŒæœŸ
 /// </summary>
 public class CLScrollSync : MonoBehaviour
 {
@@ -19,7 +19,7 @@ public class CLScrollSync : MonoBehaviour
             return;
         }
 
-        // ƒŠƒXƒg“à‚ÌƒIƒuƒWƒFƒNƒg‚ª‘¶İ‚·‚é‚©
+        // ãƒªã‚¹ãƒˆå†…ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒå­˜åœ¨ã™ã‚‹ã‹
         scrollList_.Remove(null);
         if (scrollList_.Count == 0)
         {
@@ -28,7 +28,7 @@ public class CLScrollSync : MonoBehaviour
             return;
         }
 
-        // ƒXƒNƒ[ƒ‹‘ÎÛ‚ª‘¶İ‚·‚é‚©Šm”F
+        // ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«å¯¾è±¡ãŒå­˜åœ¨ã™ã‚‹ã‹ç¢ºèª
         bool isExistScroll = false;
         foreach (CLScroll clScroll in scrollList_)
         {
@@ -45,7 +45,7 @@ public class CLScrollSync : MonoBehaviour
             return;
         }
 
-        // ƒXƒNƒ[ƒ‹ˆ—
+        // ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«å‡¦ç†
         bool isNextState = true;
         foreach (CLScroll clScroll in scrollList_)
         {
@@ -58,7 +58,7 @@ public class CLScrollSync : MonoBehaviour
         }
         playTime_ += Time.deltaTime;
 
-        // Ÿ‚Ìó‘Ô‚É‘JˆÚ
+        // æ¬¡ã®çŠ¶æ…‹ã«é·ç§»
         if (isNextState)
         {
             playTime_ = 0.0f;
@@ -84,7 +84,7 @@ public class CLScrollSync : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒXƒNƒ[ƒ‹’Ç‰Á
+    /// ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«è¿½åŠ 
     /// </summary>
     /// <param name="clScroll"></param>
     public void AddCLScroll(CLScroll clScroll)
@@ -98,7 +98,7 @@ public class CLScrollSync : MonoBehaviour
     }
 
     /// <summary>
-    /// •¡”ƒXƒNƒ[ƒ‹‚ğ’Ç‰Á
+    /// è¤‡æ•°ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã‚’è¿½åŠ 
     /// </summary>
     /// <param name="clScrolls"></param>
     public void AddCLScrolls(CLScroll[] clScrolls)

@@ -1,43 +1,43 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// •¶šƒXƒNƒ[ƒ‹
+/// æ–‡å­—ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«
 /// </summary>
 public class CLScroll : MonoBehaviour
 {
     /// <summary>
-    /// ƒXƒNƒ[ƒ‹Šî€
+    /// ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«åŸºæº–
     /// </summary>
     public enum LimitType
     {
-        ParentRect, // eƒTƒCƒY‚ğ’´‚¦‚é‚Æ‚«ƒXƒNƒ[ƒ‹
-        WordCount   // w’è•¶š”‚ğ’´‚¦‚é‚Æ‚«ƒXƒNƒ[ƒ‹
+        ParentRect, // è¦ªã‚µã‚¤ã‚ºã‚’è¶…ãˆã‚‹ã¨ãã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«
+        WordCount   // æŒ‡å®šæ–‡å­—æ•°ã‚’è¶…ãˆã‚‹ã¨ãã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«
     }
 
     /// <summary>
-    /// ƒXƒNƒ[ƒ‹ó‘Ô
+    /// ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«çŠ¶æ…‹
     /// </summary>
     public enum ScrollState
     {
-        None,           // ƒXƒNƒ[ƒ‹–³‚µ
-        StartWait,      // ƒXƒNƒ[ƒ‹ŠJn‘Ò‚¿
-        Scroll,         // ƒXƒNƒ[ƒ‹’†
-        EndWait,        // ƒXƒNƒ[ƒ‹I—¹‘Ò‚¿
-        ScrollFinish    // ƒXƒNƒ[ƒ‹I—¹
+        None,           // ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ç„¡ã—
+        StartWait,      // ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«é–‹å§‹å¾…ã¡
+        Scroll,         // ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ä¸­
+        EndWait,        // ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«çµ‚äº†å¾…ã¡
+        ScrollFinish    // ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«çµ‚äº†
     }
 
     /// <summary>
-    /// ƒXƒNƒ[ƒ‹•û–@
+    /// ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«æ–¹æ³•
     /// </summary>
     public enum SpeedType
     {
-        Speed,  // ‘¬“xw’è
-        Time    // ŠÔw’è
+        Speed,  // é€Ÿåº¦æŒ‡å®š
+        Time    // æ™‚é–“æŒ‡å®š
     }
 
     /// <summary>
-    /// È—ªî•ñ
+    /// çœç•¥æƒ…å ±
     /// </summary>
     private struct AbbreviationInfo
     {
@@ -56,7 +56,7 @@ public class CLScroll : MonoBehaviour
     [SerializeField] private LimitType limitType = LimitType.ParentRect;
     [SerializeField] private SpeedType speedType = SpeedType.Speed;
     [SerializeField] private bool isLoop = true;
-    [SerializeField] private string abbreviationLastText = "c";
+    [SerializeField] private string abbreviationLastText = "â€¦";
     [SerializeField] [Min(1)] private int characterLimit = 8;
     [SerializeField] [Min(1)] private float scrollSpeed = 25.0f;
     [SerializeField] [Min(0.1f)] private float scrollTime = 2.0f;
@@ -95,17 +95,17 @@ public class CLScroll : MonoBehaviour
     }
 
     /// <summary>
-    /// ó‘ÔXV
+    /// çŠ¶æ…‹æ›´æ–°
     /// </summary>
     /// <param name="state"></param>
     /// <param name="deltaTime"></param>
     /// <param name="isAutoChange"></param>
     public void UpdateState(ScrollState state, float deltaTime, bool isAutoChange = true)
     {
-        // eƒTƒCƒY‚ªXV‚³‚ê‚½‚Æ‚«ƒ}ƒXƒNƒTƒCƒYXV
+        // è¦ªã‚µã‚¤ã‚ºãŒæ›´æ–°ã•ã‚ŒãŸã¨ããƒã‚¹ã‚¯ã‚µã‚¤ã‚ºæ›´æ–°
         CheckRectUpdate();
 
-        // ó‘ÔØ‘Ö
+        // çŠ¶æ…‹åˆ‡æ›¿
         if (State != state)
         {
             if (State != ScrollState.None && state != ScrollState.None)
@@ -116,19 +116,19 @@ public class CLScroll : MonoBehaviour
 
         if (State == ScrollState.None || State == ScrollState.ScrollFinish)
         {
-            // ƒXƒNƒ[ƒ‹–³‚µ
+            // ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ç„¡ã—
             return;
         }
         else if (State == ScrollState.StartWait)
         {
-            // ƒXƒNƒ[ƒ‹ŠJn‘Ò‚¿
+            // ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«é–‹å§‹å¾…ã¡
             scrollWaitTime_ += deltaTime;
             if (scrollWaitTime_ > scrollStartWaitTime) { scrollWaitTime_ = scrollStartWaitTime; }
             if (IsPossibleNextState() && isAutoChange) { ChangeScrollState(ScrollState.Scroll); }
         }
         else if (State == ScrollState.Scroll)
         {
-            // ƒXƒNƒ[ƒ‹
+            // ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«
             Vector2 anchoredPosition = textArea.rectTransform.anchoredPosition;
             if (speedType == SpeedType.Speed) { anchoredPosition.x -= deltaTime * scrollSpeed; }
             else if(speedType == SpeedType.Time) { anchoredPosition.x -= deltaTime * (Mathf.Abs(finishAnchorPointX_) / scrollTime); }
@@ -138,7 +138,7 @@ public class CLScroll : MonoBehaviour
         }
         else if (State == ScrollState.EndWait)
         {
-            // ƒXƒNƒ[ƒ‹I—¹‘Ò‚¿
+            // ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«çµ‚äº†å¾…ã¡
             scrollWaitTime_ += deltaTime;
             if (scrollWaitTime_ > scrollEndWaitTime) { scrollWaitTime_ = scrollEndWaitTime; }
             if (IsPossibleNextState() && isAutoChange && isLoop) { ChangeScrollState(ScrollState.StartWait); }
@@ -146,22 +146,22 @@ public class CLScroll : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒeƒLƒXƒgİ’è
+    /// ãƒ†ã‚­ã‚¹ãƒˆè¨­å®š
     /// </summary>
     /// <param name="text"></param>
     public void SetText(string text)
     {
-        // ƒeƒLƒXƒgİ’è
+        // ãƒ†ã‚­ã‚¹ãƒˆè¨­å®š
         textArea.text = text;
 
-        // ”ñƒAƒNƒeƒBƒuó‘Ô‚ÅXV‚³‚ê‚½ê‡AƒAƒNƒeƒBƒu‚Éˆ—‚ğŠJn‚·‚é
+        // éã‚¢ã‚¯ãƒ†ã‚£ãƒ–çŠ¶æ…‹ã§æ›´æ–°ã•ã‚ŒãŸå ´åˆã€ã‚¢ã‚¯ãƒ†ã‚£ãƒ–æ™‚ã«å‡¦ç†ã‚’é–‹å§‹ã™ã‚‹
         if (!this.gameObject.activeInHierarchy || maskArea.rect.size.x <= 0.0f)
         {
             isResetting_ = true;
             return;
         }
 
-        // ƒXƒNƒ[ƒ‹‚Ì—LŒøó‘ÔØ‘Ö
+        // ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã®æœ‰åŠ¹çŠ¶æ…‹åˆ‡æ›¿
         bool isScrollEnable = false;
         if (limitType == LimitType.ParentRect)
         {
@@ -173,7 +173,7 @@ public class CLScroll : MonoBehaviour
             if (text.Length > characterLimit) { isScrollEnable = true; }
         }
 
-        // È—ªî•ñ‰Šú‰»
+        // çœç•¥æƒ…å ±åˆæœŸåŒ–
         if (abbreviationInfo_.isInitialized)
         {
             maskArea.anchorMin = Vector2.zero;
@@ -193,7 +193,7 @@ public class CLScroll : MonoBehaviour
 
         if (isScrollEnable)
         {
-            // ƒeƒLƒXƒg‚ÌˆÊ’u‚ğ¶’[‚É‚·‚é
+            // ãƒ†ã‚­ã‚¹ãƒˆã®ä½ç½®ã‚’å·¦ç«¯ã«ã™ã‚‹
             if (State == ScrollState.None)
             {
                 textAnchor_ = textArea.alignment;
@@ -215,7 +215,7 @@ public class CLScroll : MonoBehaviour
                 }
             }
 
-            // ƒeƒLƒXƒgƒGƒŠƒAİ’è
+            // ãƒ†ã‚­ã‚¹ãƒˆã‚¨ãƒªã‚¢è¨­å®š
             textArea.rectTransform.pivot = new Vector2(0.0f, 0.5f);
             textArea.rectTransform.anchorMin = Vector2.zero;
             textArea.rectTransform.anchorMax = new Vector2(0.0f, 1.0f);
@@ -223,18 +223,18 @@ public class CLScroll : MonoBehaviour
             textArea.rectTransform.offsetMin = new Vector2(textArea.rectTransform.offsetMin.x, 0.0f);
             textArea.rectTransform.offsetMax = new Vector2(textArea.rectTransform.offsetMax.x, 0.0f);
 
-            // È—ªİ’è
+            // çœç•¥è¨­å®š
             if (IsAbridgement())
             {
                 SetAbbreviationText();
             }
 
-            // ƒXƒNƒ[ƒ‹ŠJn‘Ò‚¿İ’è
+            // ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«é–‹å§‹å¾…ã¡è¨­å®š
             ChangeScrollState(ScrollState.StartWait);
         }
         else
         {
-            // ƒeƒLƒXƒgƒGƒŠƒAİ’è
+            // ãƒ†ã‚­ã‚¹ãƒˆã‚¨ãƒªã‚¢è¨­å®š
             textArea.rectTransform.pivot = new Vector2(0.0f, 0.5f);
             textArea.rectTransform.anchorMin = Vector2.zero;
             textArea.rectTransform.anchorMax = Vector2.one;
@@ -242,7 +242,7 @@ public class CLScroll : MonoBehaviour
             textArea.rectTransform.offsetMax = Vector2.zero;
             if (State != ScrollState.None) { textArea.alignment = textAnchor_; }
 
-            // ƒXƒNƒ[ƒ‹‚µ‚È‚¢İ’è
+            // ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã—ãªã„è¨­å®š
             ChangeScrollState(ScrollState.None);
         }
 
@@ -250,7 +250,7 @@ public class CLScroll : MonoBehaviour
     }
 
     /// <summary>
-    /// Ÿ‚Ì‘JˆÚ‚ª‰Â”\‚Å‚ ‚é‚©
+    /// æ¬¡ã®é·ç§»ãŒå¯èƒ½ã§ã‚ã‚‹ã‹
     /// </summary>
     /// <returns></returns>
     public bool IsPossibleNextState()
@@ -273,7 +273,7 @@ public class CLScroll : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒ‹[ƒvİ’è
+    /// ãƒ«ãƒ¼ãƒ—è¨­å®š
     /// </summary>
     public void SetLoop(bool loop)
     {
@@ -288,7 +288,7 @@ public class CLScroll : MonoBehaviour
     }
 
     /// <summary>
-    /// isó‹µƒŠƒZƒbƒg
+    /// é€²è¡ŒçŠ¶æ³ãƒªã‚»ãƒƒãƒˆ
     /// </summary>
     public void ResetTime()
     {
@@ -302,7 +302,7 @@ public class CLScroll : MonoBehaviour
     }
 
     /// <summary>
-    /// ÄXV‚Ì•K—v‚ª‚ ‚é‚©ƒ`ƒFƒbƒN‚·‚é
+    /// å†æ›´æ–°ã®å¿…è¦ãŒã‚ã‚‹ã‹ãƒã‚§ãƒƒã‚¯ã™ã‚‹
     /// </summary>
     private void CheckRectUpdate()
     {
@@ -340,17 +340,17 @@ public class CLScroll : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒXƒNƒ[ƒ‹ó‘Ôİ’è
+    /// ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«çŠ¶æ…‹è¨­å®š
     /// </summary>
     /// <param name="state"></param>
     private void ChangeScrollState(ScrollState state)
     {
         State = state;
 
-        // ƒXƒNƒ[ƒ‹‘Ò‚¿ŠÔ‰Šú‰»
+        // ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«å¾…ã¡æ™‚é–“åˆæœŸåŒ–
         scrollWaitTime_ = 0.0f;
 
-        // •¶šÈ—ª
+        // æ–‡å­—çœç•¥
         if (IsAbridgement() && abbreviationInfo_.isInitialized)
         {
             if (State == ScrollState.StartWait)
@@ -363,7 +363,7 @@ public class CLScroll : MonoBehaviour
             }
         }
 
-        // •¶šˆÊ’u‚ğ–ß‚·
+        // æ–‡å­—ä½ç½®ã‚’æˆ»ã™
         if (State != ScrollState.EndWait && State != ScrollState.ScrollFinish)
         {
             Vector2 anchoredPosition = textArea.rectTransform.anchoredPosition;
@@ -371,7 +371,7 @@ public class CLScroll : MonoBehaviour
             textArea.rectTransform.anchoredPosition = anchoredPosition;
         }
 
-        // ƒXƒNƒ[ƒ‹I—¹ˆÊ’uİ’è
+        // ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«çµ‚äº†ä½ç½®è¨­å®š
         if (State == ScrollState.Scroll)
         {
             finishAnchorPointX_ = maskArea.rect.size.x - textArea.preferredWidth;
@@ -379,7 +379,7 @@ public class CLScroll : MonoBehaviour
     }
 
     /// <summary>
-    /// È—ª‚ª—LŒø‚©
+    /// çœç•¥ãŒæœ‰åŠ¹ã‹
     /// </summary>
     /// <returns></returns>
     private bool IsAbridgement()
@@ -396,17 +396,17 @@ public class CLScroll : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒ}ƒXƒNƒTƒCƒYXV
+    /// ãƒã‚¹ã‚¯ã‚µã‚¤ã‚ºæ›´æ–°
     /// </summary>
     private void UpdateMaskSize()
     {
-        // È—ª•\¦o‚È‚¢‚Æ‚«‚Í‚»‚Ì‚Ü‚Ü
+        // çœç•¥è¡¨ç¤ºå‡ºãªã„ã¨ãã¯ãã®ã¾ã¾
         if (!IsAbridgement()) { return; }
 
-        // ƒTƒCƒY‚ª•Ï‚í‚Á‚Ä‚¢‚È‚¢ê‡‚Í‚»‚Ì‚Ü‚Ü
+        // ã‚µã‚¤ã‚ºãŒå¤‰ã‚ã£ã¦ã„ãªã„å ´åˆã¯ãã®ã¾ã¾
         if (textArea.preferredWidth == maskArea.rect.size.x) { return; }
 
-        // eƒTƒCƒYŠî€‚Ìê‡‚Íƒ}ƒXƒNƒTƒCƒYŒÅ’è(‹É’[‚ÉƒXƒy[ƒX‚ªŠJ‚­‚±‚Æ‚ª‚ ‚é‚½‚ß)
+        // è¦ªã‚µã‚¤ã‚ºåŸºæº–ã®å ´åˆã¯ãƒã‚¹ã‚¯ã‚µã‚¤ã‚ºå›ºå®š(æ¥µç«¯ã«ã‚¹ãƒšãƒ¼ã‚¹ãŒé–‹ãã“ã¨ãŒã‚ã‚‹ãŸã‚)
         if (limitType == LimitType.ParentRect) { return; }
 
         Vector2 maskOffsetMin = maskArea.offsetMin;
@@ -445,18 +445,18 @@ public class CLScroll : MonoBehaviour
     }
 
     /// <summary>
-    /// È—ªƒeƒLƒXƒg‚ğİ’è‚·‚é
+    /// çœç•¥ãƒ†ã‚­ã‚¹ãƒˆã‚’è¨­å®šã™ã‚‹
     /// </summary>
     private void SetAbbreviationText()
     {
-        // ‰Šú•¶•Û
+        // åˆæœŸæ–‡ä¿æŒ
         abbreviationInfo_.originalText = textArea.text;
         abbreviationInfo_.originalMaskOffsetLeft = maskArea.offsetMin.x;
         abbreviationInfo_.originalMaskOffsetRight = maskArea.offsetMax.x;
 
         if (limitType == LimitType.ParentRect)
         {
-            // È—ª•¶æ“¾
+            // çœç•¥æ–‡å–å¾—
             TextGenerator generator = textArea.cachedTextGenerator;
             TextGenerationSettings settings = textArea.GetGenerationSettings(textArea.rectTransform.rect.size);
             generator.Populate(textArea.text, settings);
@@ -494,26 +494,26 @@ public class CLScroll : MonoBehaviour
                 resultText = abbreviationInfo_.originalText + abbreviationLastText;
             }
 
-            // È—ª•¶İ’è
+            // çœç•¥æ–‡è¨­å®š
             textArea.text = resultText;
         }
         else if (limitType == LimitType.WordCount)
         {
-            // §ŒÀ•¶š”•ª‚Ì•¶š—ñ‚ğ”²‚«o‚·
+            // åˆ¶é™æ–‡å­—æ•°åˆ†ã®æ–‡å­—åˆ—ã‚’æŠœãå‡ºã™
             string abbreviationtext = textArea.text.Substring(0, characterLimit);
             textArea.text = abbreviationtext + abbreviationLastText;
         }
 
-        // È—ªî•ñİ’è
+        // çœç•¥æƒ…å ±è¨­å®š
         abbreviationInfo_.abbreviationText = textArea.text;
         abbreviationInfo_.isInitialized = true;
 
-        // ƒ}ƒXƒNî•ñXV
+        // ãƒã‚¹ã‚¯æƒ…å ±æ›´æ–°
         UpdateMaskSize();
     }
 
     /// <summary>
-    /// ƒCƒ“ƒXƒyƒNƒ^[•ÏXŒŸ’m
+    /// ã‚¤ãƒ³ã‚¹ãƒšã‚¯ã‚¿ãƒ¼å¤‰æ›´æ¤œçŸ¥
     /// </summary>
     private void OnValidate()
     {

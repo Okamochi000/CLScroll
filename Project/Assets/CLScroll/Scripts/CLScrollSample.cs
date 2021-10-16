@@ -1,9 +1,9 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// CLScrollƒTƒ“ƒvƒ‹
+/// CLScrollã‚µãƒ³ãƒ—ãƒ«
 /// </summary>
 public class CLScrollSample : MonoBehaviour
 {
